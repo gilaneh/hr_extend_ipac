@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="resume_en_a4" model="report.paperformat">
+    <field name="name">Contract Daily A4 Landscape</field>
+    <field name="default" eval="True"/>
+    <field name="format">custom</field>
+    <field name="page_height">297</field>
+    <field name="page_width">210</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">5</field>
+    <field name="margin_bottom">5</field>
+    <field name="margin_left">5</field>
+    <field name="margin_right">5</field>
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">3</field>
+    <field name="dpi">100</field>
+</record>
+    <record id="resume_en_a5" model="report.paperformat">
+    <field name="name">Contract Daily A5</field>
+    <field name="default" eval="True"/>
+    <field name="format">custom</field>
+    <field name="page_height">148</field>
+    <field name="page_width">210</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">10</field>
+    <field name="margin_bottom">5</field>
+    <field name="margin_left">0</field>
+    <field name="margin_right">0</field>
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">8</field>
+    <field name="dpi">100</field>
+</record>
+    <record id="resume_en_report" model="ir.actions.report">
+        <field name="name">IPAC Resume En</field>
+        <field name="model">hr.employee</field>
+<!--        <field name="report_type">qweb-html</field>-->
+<!--        <field name="report_type">xlsx</field>-->
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_extend_ipac.resume_en_template</field>
+        <field name="report_file">hr_extend_ipac.resume_en_template</field>
+        <field name="print_report_name">'Resume-%s' % object.name </field>
+        <field name="paperformat_id" ref="resume_en_a4"/>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+    </record>
+
+<!--    <record id="contract_daily_xls_report" model="ir.actions.report">-->
+<!--        <field name="name">Contract Daily Report</field>-->
+<!--        <field name="model">hr_extend_ipac.input_info</field>-->
+<!--&lt;!&ndash;        <field name="report_type">qweb-html</field>&ndash;&gt;-->
+<!--        <field name="report_type">xlsx</field>-->
+<!--&lt;!&ndash;        <field name="report_type">qweb-pdf</field>&ndash;&gt;-->
+<!--        <field name="report_name">hr_extend_ipac.contract_daily_xls_report_template</field>-->
+<!--&lt;!&ndash;        <field name="report_file">hr_extend_ipac.resume_en_template</field>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="print_report_name">'LoadingPermit-%s' % object.document_no </field>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="paperformat_id" ref="resume_en_a4"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="binding_model_id" ref="model_hr_extend_ipac_input_info"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="binding_type">report</field>&ndash;&gt;-->
+<!--    </record>-->
+
+</odoo>

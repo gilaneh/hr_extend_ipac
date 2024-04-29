@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="resume_header">
+            <div class="row pt-3 ipac_cv_header ">
+                <div t-if="lang != 'fa_IR'" class="col-4"></div>
+                <div class="col-7 mx-5 text-white font-weight-bold">
+                    <div class="mt-1 h1 " t-esc="o.name"></div>
+                    <div class="pt-2 mx-5 h3" t-esc="o.job_title"></div>
+                </div>
+            </div>
+        </template>
+
+        <template id="resume_page_1">
+            <div class="row" style="height: 1200px">
+                <t t-set="index" t-value="0"/>
+                <div class="col-4 px-2 pt-2 text-white ipac_bg_1">
+
+                    <div class="border my-4 mx-4  rounded-pill ipac_cv_contact">
+                        <div class="h3 text-white text-center my-0 py-1">Contact</div>
+                    </div>
+
+                    <div class="row h3 mb-0 mx-2 text-center">
+                        <div class="ipac_cv_icons ipac_bg_2">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="mx-2">Phone</div>
+                    </div>
+                    <div class="ml-5" t-esc="o.mobile_phone"></div>
+
+                    <div class="row h3 mt-4 mx-2 mb-0 text-center">
+                        <div class="ipac_cv_icons ipac_bg_2">
+                            <i class="fa fa-envelope "></i>
+                        </div>
+                        <div class="mx-2">Email</div>
+                    </div>
+                    <div class="ml-5" t-esc="o.work_email"></div>
+
+                    <div class="row h3 mt-4 mx-2 mb-0 text-center">
+                        <div class="ipac_cv_icons ipac_bg_2">
+                            <i class="fa fa-map-marker "></i>
+                        </div>
+                        <div class="mx-2">Address</div>
+                    </div>
+                    <div class="ml-5" t-esc="o.address_home_id.name"></div>
+
+                    <div class="" style="direction: ltr; text-align: left;">
+                        <div class="border my-4 mx-4 rounded-pill ipac_cv_contact">
+                            <div class="h3 text-white text-center  my-0 py-1">Language</div>
+                        </div>
+                        <t t-foreach="languages[o.id]" t-as="skill">
+                            <div class="mx-2 mb-2">
+                                <div class="row mx-0">
+                                    <div class="col-8 h6" t-esc="skill['name']"></div>
+                                    <div class="col-4" t-esc="skill['level']"></div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+
+                </div>
+
+
+                <div class="col-8 pt-2 ">
+                    <div t-if="educations[o.id]" class="col-5 py-1 my-4 rounded-pill ipac_cv_contact ipac_bg_1">
+                        <div class="h3 text-center text-white py-1 my-0 ">Education</div>
+                    </div>
+                    <t t-foreach="educations[o.id]" t-as="line">
+                        <div class="mx-4 mb-2">
+                            <div class="row">
+                                <div class="mx-2 h5" t-esc="line['name']"></div>
+                                <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                            </div>
+                            <div class="ml-5" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                        </div>
+                    </t>
+
+
+                    <div class="col-5 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
+                        <div class="h3 text-center  text-white my-0 py-1">Work Experience</div>
+                    </div>
+                    <t t-set="index" t-value="0"/>
+                    <t t-set="length" t-value="len(experiences[o.id])"/>
+                    <t t-foreach="experiences[o.id]" t-as="line">
+                        <div class="mx-4 mb-2">
+                            <div class="row">
+                                <div class="mx-2 h5" t-esc="line['name']"></div>
+                                <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                            </div>
+                            <div class="ml-5" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                        </div>
+                        <t t-set="index" t-value="index + 1"/>
+                        <div t-if="index &lt; length" class="col-5 border border-info m-3"></div>
+                    </t>
+
+
+                </div>
+            </div>
+        </template>
+
+        <template id="resume_page_2">
+            <div class="" style="height: 1200px">
+                <div class="col-12 mt-3 ">
+                    <div t-if="projects[o.id]">
+                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
+                            <div class="h3 text-center  text-white my-0 py-1">Projects</div>
+                        </div>
+                        <t t-set="index" t-value="0"/>
+                        <t t-set="length" t-value="len(projects[o.id])"/>
+                        <t t-foreach="projects[o.id]" t-as="line">
+                            <div class="mx-4 mb-2">
+                                <div class="row">
+                                    <div class="mx-2 h5" t-esc="line['name']"></div>
+                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                </div>
+                                <div class="ml-5" t-foreach="line['description']" t-as="desc_line"
+                                     t-esc="desc_line"></div>
+                            </div>
+                            <t t-set="index" t-value="index + 1"/>
+                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>
+                        </t>
+                        <div class=" border  m-3"></div>
+                    </div>
+
+                    <div t-if="qualifications[o.id]">
+                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
+                            <div class="h3 text-center  text-white my-0 py-1">Qualifications</div>
+                        </div>
+                        <t t-set="index" t-value="0"/>
+                        <t t-set="length" t-value="len(projects[o.id])"/>
+                        <t t-foreach="qualifications[o.id]" t-as="line">
+                            <div class="mx-4 mb-2">
+                                <div class="row">
+                                    <div class="mx-2 h5" t-esc="line['name']"></div>
+                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                </div>
+                                <div class="ml-5" t-foreach="line['description']" t-as="desc_line"
+                                     t-esc="desc_line"></div>
+                            </div>
+                            <t t-set="index" t-value="index + 1"/>
+                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>
+                        </t>
+                        <div class=" border m-3"></div>
+                    </div>
+
+
+                    <div t-if="capabilities[o.id]">
+                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
+                            <div class="h3 text-center  text-white my-0 py-1">Capabilities</div>
+                        </div>
+                        <t t-foreach="capabilities[o.id]" t-as="skill">
+                            <div class="mx-2 mb-2">
+                                <div class="row mx-0">
+                                    <div class="col-8 h6" t-esc="skill['name']"></div>
+                                    <div class="col-4" t-esc="skill['level']"></div>
+                                </div>
+                            </div>
+                        </t>
+                        <!--                        <t t-foreach="capabilities[o.id]" t-as="line">-->
+                        <!--                            <div class="mx-4 mb-2">-->
+                        <!--                                <div class="row">-->
+                        <!--                                    <div class="mx-2 h5" t-esc="line['name']"></div>-->
+                        <!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="ml-5" t-foreach="line['description']" t-as="desc_line"-->
+                        <!--                                     t-esc="desc_line"></div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-4 border border-info m-3"></div>-->
+                        <!--                        </t>-->
+                    </div>
+
+                </div>
+
+
+            </div>
+        </template>
+
+        <!-- ############################  INTERNAL Daily Report   ############################ -->
+
+        <template id="print_resume">
+            <div class="page ">
+                <t t-call="hr_extend_ipac.resume_header"/>
+                <t t-call="hr_extend_ipac.resume_page_1"/>
+            </div>
+            <div style="page-break-after:always"></div>
+            <div t-if="projects[o.id] or qualifications[o.id] or capabilities[o.id]" class="page ">
+                <t t-call="hr_extend_ipac.resume_header"/>
+                <t t-call="hr_extend_ipac.resume_page_2"/>
+            </div>
+            <div style="page-break-after:always"></div>
+        </template>
+
+
+        <!-- ############################  GENERAL   ######################################### -->
+
+        <template id="resume_en_template">
+            <t t-call="web.basic_layout" t-lang="lang">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.env.context.get('lang')"/>
+                    <t t-call="hr_extend_ipac.print_resume" t-lang="lang"/>
+
+                </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>
