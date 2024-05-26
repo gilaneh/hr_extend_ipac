@@ -67,12 +67,12 @@
                         <div class="h3 text-center text-white py-1 my-0 ">Education</div>
                     </div>
                     <t t-foreach="educations[o.id]" t-as="line">
-                        <div class="mx-4 mb-2">
+                        <div class="mx-4 mb-3">
                             <div class="row">
-                                <div class="mx-2 h5" t-esc="line['name']"></div>
-                                <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
+                                <div class="col-8 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
-                            <div class="ml-5" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                            <div class="ml-3" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
                         </div>
                     </t>
 
@@ -83,15 +83,15 @@
                     <t t-set="index" t-value="0"/>
                     <t t-set="length" t-value="len(experiences[o.id])"/>
                     <t t-foreach="experiences[o.id]" t-as="line">
-                        <div class="mx-4 mb-2">
+                        <div class="mx-4 mb-3">
                             <div class="row">
-                                <div class="mx-2 h5" t-esc="line['name']"></div>
-                                <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
+                                <div class="col-4 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
-                            <div class="ml-5" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                            <div class="ml-3" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
                         </div>
                         <t t-set="index" t-value="index + 1"/>
-                        <div t-if="index &lt; length" class="col-5 border border-info m-3"></div>
+<!--                        <div t-if="index &lt; length" class="col-5 border border-info m-3"></div>-->
                     </t>
 
 
@@ -109,16 +109,16 @@
                         <t t-set="index" t-value="0"/>
                         <t t-set="length" t-value="len(projects[o.id])"/>
                         <t t-foreach="projects[o.id]" t-as="line">
-                            <div class="mx-4 mb-2">
+                            <div class="ml-5 mb-2">
                                 <div class="row">
                                     <div class="mx-2 h5" t-esc="line['name']"></div>
-                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+<!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
                                 </div>
-                                <div class="ml-5" t-foreach="line['description']" t-as="desc_line"
+                                <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
                                      t-esc="desc_line"></div>
                             </div>
                             <t t-set="index" t-value="index + 1"/>
-                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>
+<!--                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>-->
                         </t>
                         <div class=" border  m-3"></div>
                     </div>
@@ -130,12 +130,12 @@
                         <t t-set="index" t-value="0"/>
                         <t t-set="length" t-value="len(projects[o.id])"/>
                         <t t-foreach="qualifications[o.id]" t-as="line">
-                            <div class="mx-4 mb-2">
+                            <div class="ml-5 mb-2">
                                 <div class="row">
-                                    <div class="mx-2 h5" t-esc="line['name']"></div>
-                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                    <div class="col-8 h6 font-weight-bold" t-esc="line['name']"></div>
+                                    <div class="col-4 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                                 </div>
-                                <div class="ml-5" t-foreach="line['description']" t-as="desc_line"
+                                <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
                                      t-esc="desc_line"></div>
                             </div>
                             <t t-set="index" t-value="index + 1"/>

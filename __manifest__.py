@@ -21,7 +21,7 @@
     'version': '15.0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web','hr', 'hr_skills'],
+    'depends': ['base', 'web','hr', 'hr_skills',],
 
     # always loaded
     'data': [
@@ -29,6 +29,7 @@
         'views/hr_employee_views.xml',
         'report/resume_en.xml',
         'report/resume_en_template.xml',
+
     ],
     'assets': {
         'web.report_assets_common': [
