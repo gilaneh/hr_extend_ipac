@@ -6,7 +6,11 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='job_title']" position="after">
+<!--            <xpath expr="//field[@name='name']" position="after">-->
+            <xpath expr="//div[hasclass('oe_title')]/h1" position="after">
+                <h1 class="d-flex">
+                    <field name="name_cv" calss="" placeholder="CV Name"/>
+                </h1>
 <!--                    <button name="print_resume" type="object" string="Print Resume" class="btn btn-primary"/>-->
 
             </xpath>

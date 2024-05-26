@@ -5,7 +5,7 @@
             <div class="row pt-3 ipac_cv_header ">
                 <div t-if="lang != 'fa_IR'" class="col-4"></div>
                 <div class="col-7 mx-5 text-white font-weight-bold">
-                    <div class="mt-1 h1 " t-esc="o.name"></div>
+                    <div class="mt-1 h1 " t-esc="o.name_cv"></div>
                     <div class="pt-2 mx-5 h3" t-esc="o.job_title"></div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         <div class="mx-4 mb-3">
                             <div class="row">
                                 <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
-                                <div class="col-8 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                <div class="col-4 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
                             <div class="ml-3" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
                         </div>

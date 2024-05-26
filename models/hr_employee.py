@@ -7,10 +7,11 @@ from odoo import fields, models, api
 class HrExtendEmployeeResume(models.Model):
     _inherit = "hr.employee"
 
-    # name = fields.Char(translate=True)
+    name_cv = fields.Char(translate=True)
+    job_title = fields.Char(translate=True)
 
     def print_resume(self):
-        print(f'\n=================== Print Resume =========================\n')
+        # print(f'\n=================== Print Resume =========================\n')
         data = {'form_data': {'a': 1}}
         # print(f'\n {read_form.get("calendar")}')
         return self.env.ref('hr_extend_ipac.resume_en_report').report_action(self,)
