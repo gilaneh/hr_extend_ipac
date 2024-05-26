@@ -51,8 +51,8 @@
                         <t t-foreach="languages[o.id]" t-as="skill">
                             <div class="mx-2 mb-2">
                                 <div class="row mx-0">
-                                    <div class="col-8 h6" t-esc="skill['name']"></div>
-                                    <div class="col-4" t-esc="skill['level']"></div>
+                                    <div class="col-8 p-0 h6" t-esc="skill['name']"></div>
+                                    <div class="col-4 p-0 small" t-esc="skill['level']"></div>
                                 </div>
                             </div>
                         </t>
@@ -72,7 +72,7 @@
                                 <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
                                 <div class="col-4 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
-                            <div class="ml-3" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                            <div class="ml-3 small" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
                         </div>
                     </t>
 
@@ -88,7 +88,7 @@
                                 <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
                                 <div class="col-4 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
-                            <div class="ml-3" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                            <div class="ml-3 small" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
                         </div>
                         <t t-set="index" t-value="index + 1"/>
 <!--                        <div t-if="index &lt; length" class="col-5 border border-info m-3"></div>-->
@@ -109,9 +109,9 @@
                         <t t-set="index" t-value="0"/>
                         <t t-set="length" t-value="len(projects[o.id])"/>
                         <t t-foreach="projects[o.id]" t-as="line">
-                            <div class="ml-5 mb-2">
-                                <div class="row">
-                                    <div class="mx-2 h5" t-esc="line['name']"></div>
+                            <div class="ml-5">
+                                <div class="row mx-0 ">
+                                    <div class="col mx-0 p-0 " t-esc="line['name']"></div>
 <!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
                                 </div>
                                 <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
@@ -120,7 +120,7 @@
                             <t t-set="index" t-value="index + 1"/>
 <!--                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>-->
                         </t>
-                        <div class=" border  m-3"></div>
+<!--                        <div class=" border  m-3"></div>-->
                     </div>
 
                     <div t-if="qualifications[o.id]">
@@ -130,10 +130,10 @@
                         <t t-set="index" t-value="0"/>
                         <t t-set="length" t-value="len(projects[o.id])"/>
                         <t t-foreach="qualifications[o.id]" t-as="line">
-                            <div class="ml-5 mb-2">
-                                <div class="row">
-                                    <div class="col-8 h6 font-weight-bold" t-esc="line['name']"></div>
-                                    <div class="col-4 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                            <div class="ml-5">
+                                <div class="row mx-0">
+                                    <div class="col-9 h6 p-0 font-weight-bold" t-esc="line['name']"></div>
+                                    <div class="col-3 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                                 </div>
                                 <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
                                      t-esc="desc_line"></div>
@@ -150,35 +150,24 @@
                             <div class="h3 text-center  text-white my-0 py-1">Capabilities</div>
                         </div>
                         <t t-foreach="capabilities[o.id]" t-as="skill">
-                            <div class="mx-2 mb-2">
+                            <div class="ml-5">
                                 <div class="row mx-0">
-                                    <div class="col-8 h6" t-esc="skill['name']"></div>
-                                    <div class="col-4" t-esc="skill['level']"></div>
+                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
+                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
                                 </div>
                             </div>
                         </t>
-                        <!--                        <t t-foreach="capabilities[o.id]" t-as="line">-->
-                        <!--                            <div class="mx-4 mb-2">-->
-                        <!--                                <div class="row">-->
-                        <!--                                    <div class="mx-2 h5" t-esc="line['name']"></div>-->
-                        <!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="ml-5" t-foreach="line['description']" t-as="desc_line"-->
-                        <!--                                     t-esc="desc_line"></div>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="col-4 border border-info m-3"></div>-->
-                        <!--                        </t>-->
-                    </div>
+                     </div>
 
                     <div t-if="software[o.id]">
                         <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
                             <div class="h3 text-center  text-white my-0 py-1">Software</div>
                         </div>
                         <t t-foreach="software[o.id]" t-as="skill">
-                            <div class="mx-2">
+                            <div class="ml-5">
                                 <div class="row mx-0">
-                                    <div class="col-8 h6" t-esc="skill['name']"></div>
-                                    <div class="col-4" t-esc="skill['level']"></div>
+                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
+                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
                                 </div>
                             </div>
                         </t>
