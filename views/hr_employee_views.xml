@@ -20,7 +20,7 @@
     <record model="ir.ui.view" id="employee_skills_list">
         <field name="name">Employee Skills</field>
         <field name="model">hr.employee</field>
-        <field name="priority">10</field>
+        <field name="priority">1000</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -32,7 +32,7 @@
     <record model="ir.ui.view" id="employee_skills_form">
         <field name="name">Employee Skills</field>
         <field name="model">hr.employee</field>
-        <field name="priority">10</field>
+        <field name="priority">1000</field>
         <field name="arch" type="xml">
             <form>
                 <!--                    <sheet>-->
