@@ -170,6 +170,20 @@
                         <!--                        </t>-->
                     </div>
 
+                    <div t-if="software[o.id]">
+                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
+                            <div class="h3 text-center  text-white my-0 py-1">Software</div>
+                        </div>
+                        <t t-foreach="software[o.id]" t-as="skill">
+                            <div class="mx-2 mb-2">
+                                <div class="row mx-0">
+                                    <div class="col-8 h6" t-esc="skill['name']"></div>
+                                    <div class="col-4" t-esc="skill['level']"></div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
                 </div>
 
 

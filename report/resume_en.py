@@ -40,6 +40,7 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
         projects = {}
         qualifications = {}
         capabilities = {}
+        software = {}
         languages = {}
         for doc in docs:
             educa = []
@@ -47,6 +48,7 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
             proj = []
             quali = []
             capab = []
+            soft = []
             langu = []
             for line in doc.resume_line_ids:
                 if line.line_type_id.name == 'Education':
@@ -91,11 +93,17 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
+                elif skill.skill_type_id.name == 'Software':
+                    soft.append({  'id': doc.id,
+                                    'name': skill.skill_id.name,
+                                    'level': skill.skill_level_id.name,
+                                    })
             educations[doc.id] = educa
             experiences[doc.id] = exper
             projects[doc.id] = proj
             qualifications[doc.id] = quali
             capabilities[doc.id] = capab
+            software[doc.id] = soft
             languages[doc.id] = sorted(langu, key=lambda x: x['name'])
 
         return {
@@ -106,6 +114,7 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
             'projects': projects,
             'qualifications': qualifications,
             'capabilities': capabilities,
+            'software': software,
             'languages': languages,
         }
 
