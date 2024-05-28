@@ -32,6 +32,9 @@
 .ipac_bg_2{
     background-color: rgb(7, 116, 178) !important;
 }
+.ipac_cv_contact::before {
+
+}
 
 .ipac_cv_contact{
     border-color: rgb(7, 116, 178) !important;
@@ -49,7 +52,12 @@
     align-self: center;
 }
 
+.ipac_pagebreak { page-break-before: always; }
+    .ipac_pagebreak_avoid {page-break-inside: avoid;}
+
 
 @media print {
     .ipac_pagebreak { page-break-before: always; } /* page-break-after works, as well */
+    .ipac_pagebreak_avoid {page-break-inside: avoid;}
+
 }

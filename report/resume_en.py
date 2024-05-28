@@ -41,6 +41,7 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
         qualifications = {}
         capabilities = {}
         software = {}
+        trainings = {}
         languages = {}
         for doc in docs:
             educa = []
@@ -49,6 +50,7 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
             quali = []
             capab = []
             soft = []
+            train = []
             langu = []
             for line in doc.resume_line_ids:
                 if line.line_type_id.name == 'Education':
@@ -98,14 +100,55 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
+            if doc.resume_projects and doc.resume_projects.strip() != '':
+                resume_projects = doc.resume_projects.split('\n')
+                for record_name in resume_projects:
+                    proj.append({'id': doc.id,
+                             'name': record_name,
+                             'description': '',
+                             'date_start': '',
+                             'date_end': '',
+                             })
+            if doc.resume_qualifications and doc.resume_qualifications.strip() != '':
+                resume_qualifications = doc.resume_qualifications.split('\n')
+                for record_name in resume_qualifications:
+                    quali.append({'id': doc.id,
+                             'name': record_name,
+                             'description': '',
+                             'date_start': '',
+                             'date_end': '',
+                             })
+            if doc.resume_capabilities and doc.resume_capabilities.strip() != '':
+                resume_capabilities = doc.resume_capabilities.split('\n')
+                for record_name in resume_capabilities:
+                    capab.append({'id': doc.id,
+                             'name': record_name,
+                             'level': '',
+                             })
+            if doc.resume_software and doc.resume_software.strip() != '':
+                resume_software = doc.resume_software.split('\n')
+                for record_name in resume_software:
+                    soft.append({'id': doc.id,
+                             'name': record_name,
+                             'level': '',
+                             })
+            if doc.resume_trainings and doc.resume_trainings.strip() != '':
+                resume_trainings = doc.resume_trainings.split('\n')
+                for record_name in resume_trainings:
+                    train.append({'id': doc.id,
+                             'name': record_name,
+                             'level': '',
+                             })
+
             educations[doc.id] = educa
             experiences[doc.id] = exper
             projects[doc.id] = proj
             qualifications[doc.id] = quali
             capabilities[doc.id] = capab
             software[doc.id] = soft
+            trainings[doc.id] = train
             languages[doc.id] = sorted(langu, key=lambda x: x['name'])
-
+        # print(f'ssssssssssssssssssssss\n {software}')
         return {
             'docs': docs,
             'doc_ids': docids,
@@ -115,6 +158,7 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
             'qualifications': qualifications,
             'capabilities': capabilities,
             'software': software,
+            'trainings': trainings,
             'languages': languages,
         }
 

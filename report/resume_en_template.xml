@@ -9,12 +9,13 @@
                     <div class="pt-2 mx-5 h3" t-esc="o.job_title"></div>
                 </div>
             </div>
+
         </template>
 
         <template id="resume_page_1">
-            <div class="row" style="height: 1200px">
+            <div class="row " style="height: 100%;">
                 <t t-set="index" t-value="0"/>
-                <div class="col-4 px-2 pt-2 text-white ipac_bg_1">
+                <div class="col-4 px-2 pt-4 text-white ipac_bg_1" style="height: 1230px; ">
 
                     <div class="border my-4 mx-4  rounded-pill ipac_cv_contact">
                         <div class="h3 text-white text-center my-0 py-1">Contact</div>
@@ -70,9 +71,11 @@
                         <div class="mx-4 mb-3">
                             <div class="row">
                                 <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
-                                <div class="col-4 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                <div class="col-4 p-0 small"
+                                     t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
-                            <div class="ml-3 small" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                            <div class="ml-3 small" t-foreach="line['description']" t-as="desc_line"
+                                 t-esc="desc_line"></div>
                         </div>
                     </t>
 
@@ -86,23 +89,27 @@
                         <div class="mx-4 mb-3">
                             <div class="row">
                                 <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
-                                <div class="col-4 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                <div class="col-4 p-0 small"
+                                     t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
-                            <div class="ml-3 small" t-foreach="line['description']" t-as="desc_line" t-esc="desc_line"></div>
+                            <div class="ml-3 small" t-foreach="line['description']" t-as="desc_line"
+                                 t-esc="desc_line"></div>
                         </div>
                         <t t-set="index" t-value="index + 1"/>
-<!--                        <div t-if="index &lt; length" class="col-5 border border-info m-3"></div>-->
+                        <!--                        <div t-if="index &lt; length" class="col-5 border border-info m-3"></div>-->
                     </t>
 
 
                 </div>
             </div>
+            <div style="page-break-after:always"></div>
+
         </template>
 
         <template id="resume_page_2">
-            <div class="" style="height: 1200px">
-                <div class="col-12 mt-3 ">
-                    <div t-if="projects[o.id]">
+            <div class="">
+                <div class="col-12">
+                    <div t-if="projects[o.id]" class="ipac_pagebreak_avoid">
                         <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
                             <div class="h3 text-center  text-white my-0 py-1">Projects</div>
                         </div>
@@ -112,18 +119,18 @@
                             <div class="ml-5">
                                 <div class="row mx-0 ">
                                     <div class="col mx-0 p-0 " t-esc="line['name']"></div>
-<!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
+                                    <!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
                                 </div>
                                 <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
                                      t-esc="desc_line"></div>
                             </div>
                             <t t-set="index" t-value="index + 1"/>
-<!--                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>-->
+                            <!--                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>-->
                         </t>
-<!--                        <div class=" border  m-3"></div>-->
+                        <!--                        <div class=" border  m-3"></div>-->
                     </div>
 
-                    <div t-if="qualifications[o.id]">
+                    <div t-if="qualifications[o.id]" class="ipac_pagebreak_avoid">
                         <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
                             <div class="h3 text-center  text-white my-0 py-1">Qualifications</div>
                         </div>
@@ -133,19 +140,18 @@
                             <div class="ml-5">
                                 <div class="row mx-0">
                                     <div class="col-9 h6 p-0 font-weight-bold" t-esc="line['name']"></div>
-                                    <div class="col-3 p-0 small" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                    <div class="col-3 p-0 small"
+                                         t-esc="line['date_start'] + ' - ' + line['date_end'] if line['date_end'] else line['date_start']"></div>
                                 </div>
                                 <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
                                      t-esc="desc_line"></div>
                             </div>
-                            <t t-set="index" t-value="index + 1"/>
-                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>
+<!--                            <t t-set="index" t-value="index + 1"/>-->
+<!--                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>-->
                         </t>
-                        <div class=" border m-3"></div>
                     </div>
 
-
-                    <div t-if="capabilities[o.id]">
+                    <div t-if="capabilities[o.id]" class="ipac_pagebreak_avoid">
                         <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
                             <div class="h3 text-center  text-white my-0 py-1">Capabilities</div>
                         </div>
@@ -157,10 +163,11 @@
                                 </div>
                             </div>
                         </t>
-                     </div>
+                    </div>
 
-                    <div t-if="software[o.id]">
-                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
+
+                    <div t-if="software[o.id]" class="ipac_pagebreak_avoid">
+                        <div class="col-4 py-1 my-4  rounded-pill  ipac_bg_1 ">
                             <div class="h3 text-center  text-white my-0 py-1">Software</div>
                         </div>
                         <t t-foreach="software[o.id]" t-as="skill">
@@ -173,39 +180,56 @@
                         </t>
                     </div>
 
+                    <div t-if="trainings[o.id]" class="ipac_pagebreak_avoid">
+                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
+                            <div class="h3 text-center  text-white my-0 py-1">Training</div>
+                        </div>
+                        <t t-foreach="trainings[o.id]" t-as="skill">
+                            <div class="ml-5">
+                                <div class="row mx-0">
+                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
+                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
                 </div>
 
 
             </div>
+
         </template>
 
         <!-- ############################  INTERNAL Daily Report   ############################ -->
 
         <template id="print_resume">
-            <div class="page ">
+            <div class="header">
                 <t t-call="hr_extend_ipac.resume_header"/>
-                <t t-call="hr_extend_ipac.resume_page_1"/>
             </div>
-            <div style="page-break-after:always"></div>
-            <div t-if="projects[o.id] or qualifications[o.id] or capabilities[o.id]" class="page ">
-                <t t-call="hr_extend_ipac.resume_header"/>
+            <div class="page">
+                <t t-call="hr_extend_ipac.resume_page_1"/>
                 <t t-call="hr_extend_ipac.resume_page_2"/>
             </div>
-            <div style="page-break-after:always"></div>
+            <div class="footer p-0">
+                    <div class="text-center x-small p-0"> <span class="page"></span> / <span class="topage"></span></div>
+            </div>
         </template>
-
 
         <!-- ############################  GENERAL   ######################################### -->
 
         <template id="resume_en_template">
-            <t t-call="web.basic_layout" t-lang="lang">
-                <t t-foreach="docs" t-as="o">
-                    <t t-set="lang" t-value="o.env.context.get('lang')"/>
-                    <t t-call="hr_extend_ipac.print_resume" t-lang="lang"/>
-
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout" t-lang="lang">
+                    <!--                    <t t-call="hr_extend_ipac.resume_header"/>-->
+                    <div class="page1">
+                        <t t-set="lang" t-value="o.env.context.get('lang')"/>
+                        <t t-call="hr_extend_ipac.print_resume" t-lang="lang"/>
+                    </div>
                 </t>
-            </t>
 
+            </t>
         </template>
+
     </data>
 </odoo>

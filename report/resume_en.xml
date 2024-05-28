@@ -8,34 +8,20 @@
     <field name="page_height">297</field>
     <field name="page_width">210</field>
     <field name="orientation">Portrait</field>
-    <field name="margin_top">5</field>
-    <field name="margin_bottom">5</field>
-    <field name="margin_left">5</field>
-    <field name="margin_right">5</field>
-    <field name="header_line" eval="False"/>
-    <field name="header_spacing">3</field>
-    <field name="dpi">100</field>
-</record>
-    <record id="resume_en_a5" model="report.paperformat">
-    <field name="name">Contract Daily A5</field>
-    <field name="default" eval="True"/>
-    <field name="format">custom</field>
-    <field name="page_height">148</field>
-    <field name="page_width">210</field>
-    <field name="orientation">Portrait</field>
-    <field name="margin_top">10</field>
-    <field name="margin_bottom">5</field>
+    <field name="margin_top">37</field>
+    <field name="margin_bottom">7</field>
     <field name="margin_left">0</field>
     <field name="margin_right">0</field>
-    <field name="header_line" eval="False"/>
-    <field name="header_spacing">8</field>
+    <field name="header_line" eval="True"/>
+    <field name="header_spacing">37</field>
     <field name="dpi">100</field>
 </record>
+
     <record id="resume_en_report" model="ir.actions.report">
         <field name="name">IPAC Resume En</field>
         <field name="model">hr.employee</field>
-<!--        <field name="report_type">qweb-html</field>-->
 <!--        <field name="report_type">xlsx</field>-->
+<!--        <field name="report_type">qweb-html</field>-->
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">hr_extend_ipac.resume_en_template</field>
         <field name="report_file">hr_extend_ipac.resume_en_template</field>

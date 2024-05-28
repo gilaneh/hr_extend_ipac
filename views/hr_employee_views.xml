@@ -6,13 +6,20 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <!--            <xpath expr="//field[@name='name']" position="after">-->
             <xpath expr="//div[hasclass('oe_title')]/h1" position="after">
                 <h1 class="d-flex">
                     <field name="name_cv" calss="" placeholder="CV Name"/>
                 </h1>
-                <!--                    <button name="print_resume" type="object" string="Print Resume" class="btn btn-primary"/>-->
-
+            </xpath>
+            <xpath expr="//page[@name='public']" position="inside">
+                <group>
+                    <field name="resume_extend" readonly="1"/>
+                    <field name="resume_projects"/>
+                    <field name="resume_capabilities"/>
+                    <field name="resume_qualifications"/>
+                    <field name="resume_software"/>
+                    <field name="resume_trainings"/>
+                </group>
             </xpath>
         </field>
     </record>
