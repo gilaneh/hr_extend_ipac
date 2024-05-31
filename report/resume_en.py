@@ -10,6 +10,18 @@ from odoo import http
 
 
 # ########################################################################################
+class ReportHrExtendIpacResumeEnBw(models.AbstractModel):
+    _name = 'report.hr_extend_ipac.resume_en_template_bw'
+    # _name = 'report.hr_employee.resume_en_report'
+    _description = 'IPAC Resume'
+
+    @api.model
+    def _get_report_values(self, docids=None, data=None):
+        report = self.env['report.hr_extend_ipac.resume_en_template']
+        data['report_color'] = 'bw'
+        return report.get_report_values(docids, data)
+
+# ########################################################################################
 class ReportHrExtendIpacResumeEn(models.AbstractModel):
     _name = 'report.hr_extend_ipac.resume_en_template'
     # _name = 'report.hr_employee.resume_en_report'
@@ -32,16 +44,17 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
         calendar = context.get('lang')
         date_time1 = self.date_converter(date_time, context.get('lang'))
 
-        # print(f'\n==============\n'
-        #       f'date_time: {date_time}  date_time1:{date_time1}  ')
         doc_list = []
         educations = {}
         experiences = {}
-        projects = {}
+        projects_1 = {}
+        projects_2 = {}
         qualifications = {}
-        capabilities = {}
+        capabilities_1 = {}
+        capabilities_2 = {}
         software = {}
         trainings = {}
+        awards = {}
         languages = {}
         for doc in docs:
             educa = []
@@ -51,9 +64,21 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
             capab = []
             soft = []
             train = []
+            awar = []
             langu = []
+
+            educa_count = 0
+            exper_count = 0
+            proj_count = 0
+            quali_count = 0
+            capab_count = 0
+            soft_count = 0
+            train_count = 0
+            award_count = 0
+            langu_count = 0
             for line in doc.resume_line_ids:
                 if line.line_type_id.name == 'Education':
+                    educa_count += 1 + len(line.description.split('\n')) if line.description else 0
                     educa.append({'id': doc.id,
                                    'name': line.name,
                                    'description': line.description.split('\n') if line.description else [],
@@ -61,41 +86,42 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                                    'date_end': self.date_converter(line.date_end, context.get('lang'))['date'] if line.date_end else _('Current'),
                                    })
                 elif line.line_type_id.name == 'Experience':
+                    exper_count += 1 + len(line.description.split('\n')) if line.description else 0
                     exper.append({'name': line.name,
                                   'description': line.description.split('\n') if line.description else [],
                                   'date_start': self.date_converter(line.date_start, context.get('lang'))['date'],
                                        'date_end': self.date_converter(line.date_end, context.get('lang'))['date'] if line.date_end else _('Current'),
                                        })
                 elif line.line_type_id.name == 'Projects':
+                    proj_count += 1 + len(line.description.split('\n')) if line.description else 0
                     proj.append({'name': line.name,
                                   'description': line.description.split('\n') if line.description else [],
                                   'date_start': self.date_converter(line.date_start, context.get('lang'))['date'],
                                        'date_end': self.date_converter(line.date_end, context.get('lang'))['date'] if line.date_end else _('Current'),
                                        })
                 elif line.line_type_id.name == 'Qualifications':
+                    quali_count += 1 + len(line.description.split('\n')) if line.description else 0
                     quali.append({'name': line.name,
                                   'description': line.description.split('\n') if line.description else [],
                                   'date_start': self.date_converter(line.date_start, context.get('lang'))['date'],
                                        'date_end': self.date_converter(line.date_end, context.get('lang'))['date'] if line.date_end else _('Current'),
                                        })
-                # elif line.line_type_id.name == 'Capabilities':
-                #     capab.append({'name': line.name,
-                #                   'description': line.description.split('\n') if line.description else [],
-                #                   'date_start': self.date_converter(line.date_start, context.get('lang'))['date'],
-                #                        'date_end': self.date_converter(line.date_end, context.get('lang'))['date'] if line.date_end else _('Current'),
-                #                        })
+
             for skill in doc.employee_skill_ids:
                 if skill.skill_type_id.name == 'Language':
+                    langu_count += 1 + len(line.description.split('\n')) if line.description else 0
                     langu.append({  'id': doc.id,
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
                 elif skill.skill_type_id.name == 'Capabilities':
+                    capab_count += 1 + len(line.description.split('\n')) if line.description else 0
                     capab.append({  'id': doc.id,
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
                 elif skill.skill_type_id.name == 'Software':
+                    soft_count += 1 + len(line.description.split('\n')) if line.description else 0
                     soft.append({  'id': doc.id,
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
@@ -103,16 +129,8 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
             if doc.resume_projects and doc.resume_projects.strip() != '':
                 resume_projects = doc.resume_projects.split('\n')
                 for record_name in resume_projects:
+                    proj_count += len(record_name) // 80 or 1
                     proj.append({'id': doc.id,
-                             'name': record_name,
-                             'description': '',
-                             'date_start': '',
-                             'date_end': '',
-                             })
-            if doc.resume_qualifications and doc.resume_qualifications.strip() != '':
-                resume_qualifications = doc.resume_qualifications.split('\n')
-                for record_name in resume_qualifications:
-                    quali.append({'id': doc.id,
                              'name': record_name,
                              'description': '',
                              'date_start': '',
@@ -120,13 +138,27 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                              })
             if doc.resume_capabilities and doc.resume_capabilities.strip() != '':
                 resume_capabilities = doc.resume_capabilities.split('\n')
+                capab_count += len(resume_capabilities)
                 for record_name in resume_capabilities:
+                    capab_count += len(record_name) // 80 or 1
                     capab.append({'id': doc.id,
                              'name': record_name,
                              'level': '',
                              })
+            if doc.resume_qualifications and doc.resume_qualifications.strip() != '':
+                resume_qualifications = doc.resume_qualifications.split('\n')
+                quali_count += len(resume_qualifications)
+                for record_name in resume_qualifications:
+                    quali.append({'id': doc.id,
+                             'name': record_name,
+                             'description': '',
+                             'date_start': '',
+                             'date_end': '',
+                             })
+
             if doc.resume_software and doc.resume_software.strip() != '':
                 resume_software = doc.resume_software.split('\n')
+                soft_count += len(resume_software)
                 for record_name in resume_software:
                     soft.append({'id': doc.id,
                              'name': record_name,
@@ -134,31 +166,59 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                              })
             if doc.resume_trainings and doc.resume_trainings.strip() != '':
                 resume_trainings = doc.resume_trainings.split('\n')
+                train_count += len(resume_trainings)
                 for record_name in resume_trainings:
                     train.append({'id': doc.id,
+                             'name': record_name,
+                             'level': '',
+                             })
+            if doc.resume_awards and doc.resume_awards.strip() != '':
+                resume_awards = doc.resume_awards.split('\n')
+                award_count += len(resume_awards)
+                for record_name in resume_awards:
+                    awar.append({'id': doc.id,
                              'name': record_name,
                              'level': '',
                              })
 
             educations[doc.id] = educa
             experiences[doc.id] = exper
-            projects[doc.id] = proj
+
+            edu_exp_count = educa_count + exper_count
+            if 26 - edu_exp_count <= 0:
+                projects_1[doc.id] = []
+                projects_2[doc.id] = proj
+            else:
+                projects_1[doc.id] = proj[0: 26 - edu_exp_count]
+                projects_2[doc.id] = proj[26 - edu_exp_count:]
+
+            edu_exp_proj_count = educa_count + exper_count + proj_count
+            if 21 - edu_exp_proj_count <= 0:
+                capabilities_1[doc.id] = []
+                capabilities_2[doc.id] = capab
+            else:
+                capabilities_1[doc.id] = capab[0: 21 - edu_exp_proj_count]
+                capabilities_2[doc.id] = capab[21 - edu_exp_proj_count:]
+
             qualifications[doc.id] = quali
-            capabilities[doc.id] = capab
             software[doc.id] = soft
             trainings[doc.id] = train
+            awards[doc.id] = awar
             languages[doc.id] = sorted(langu, key=lambda x: x['name'])
-        # print(f'ssssssssssssssssssssss\n {software}')
+
         return {
             'docs': docs,
             'doc_ids': docids,
             'educations': educations,
             'experiences': experiences,
-            'projects': projects,
+            'projects_1': projects_1,
+            'projects_2': projects_2,
             'qualifications': qualifications,
-            'capabilities': capabilities,
+            'capabilities_1': capabilities_1,
+            'capabilities_2': capabilities_2,
             'software': software,
             'trainings': trainings,
+            'awards': awards,
             'languages': languages,
         }
 

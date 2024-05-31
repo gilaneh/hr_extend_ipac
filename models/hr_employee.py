@@ -16,6 +16,7 @@ class HrExtendEmployeeResume(models.Model):
     resume_qualifications = fields.Text(related='resume_extend.qualifications', readonly=False)
     resume_software = fields.Text(related='resume_extend.software', readonly=False)
     resume_trainings = fields.Text(related='resume_extend.trainings', readonly=False)
+    resume_awards = fields.Text(related='resume_extend.awards', readonly=False)
 
     @api.model
     def create(self, vals):

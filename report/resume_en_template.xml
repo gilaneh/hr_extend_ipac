@@ -2,9 +2,9 @@
 <odoo>
     <data>
         <template id="resume_header">
-            <div class="row pt-3 ipac_cv_header ">
+            <div t-attf-class="row pt-3 {{'ipac_cv_header_bw' if report_color == 'bw' else 'ipac_cv_header'}} ">
                 <div t-if="lang != 'fa_IR'" class="col-4"></div>
-                <div class="col-7 mx-5 text-white font-weight-bold">
+                <div t-attf-class="col-7 mx-5 {{text_color}} font-weight-bold">
                     <div class="mt-1 h1 " t-esc="o.name_cv"></div>
                     <div class="pt-2 mx-5 h3" t-esc="o.job_title"></div>
                 </div>
@@ -13,41 +13,39 @@
         </template>
 
         <template id="resume_page_1">
-            <div class="row " style="height: 100%;">
-                <t t-set="index" t-value="0"/>
-                <div class="col-4 px-2 pt-4 text-white ipac_bg_1" style="height: 1230px; ">
-
+            <div class="row " style="height: 1230px;">
+                <div t-attf-class="col-4 px-2 pt-2 {{text_color}} {{ipac_bg_1}}">
                     <div class="border my-4 mx-4  rounded-pill ipac_cv_contact">
-                        <div class="h3 text-white text-center my-0 py-1">Contact</div>
+                        <div t-attf-class="h3 text-center my-0 py-1 {{text_color}}">Contact</div>
                     </div>
-
-                    <div class="row h3 mb-0 mx-2 text-center">
-                        <div class="ipac_cv_icons ipac_bg_2">
-                            <i class="fa fa-phone"></i>
+                    <div class="pl-3 ">
+                        <div class="row h3 mb-0 mx-2 text-center">
+                            <div t-attf-class="ipac_cv_icons {{ipac_bg_2}}">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="mx-2">Phone</div>
                         </div>
-                        <div class="mx-2">Phone</div>
-                    </div>
-                    <div class="ml-5" t-esc="o.mobile_phone"></div>
+                        <div class="ml-5" t-esc="o.mobile_phone"></div>
 
-                    <div class="row h3 mt-4 mx-2 mb-0 text-center">
-                        <div class="ipac_cv_icons ipac_bg_2">
-                            <i class="fa fa-envelope "></i>
+                        <div class="row h3 mt-5 mx-2 mb-0 text-center">
+                            <div t-attf-class="ipac_cv_icons {{ipac_bg_2}}">
+                                <i class="fa fa-envelope "></i>
+                            </div>
+                            <div class="mx-2">Email</div>
                         </div>
-                        <div class="mx-2">Email</div>
-                    </div>
-                    <div class="ml-5" t-esc="o.work_email"></div>
+                        <div class="ml-5" t-esc="o.work_email"></div>
 
-                    <div class="row h3 mt-4 mx-2 mb-0 text-center">
-                        <div class="ipac_cv_icons ipac_bg_2">
-                            <i class="fa fa-map-marker "></i>
+                        <div class="row h3 mt-5 mx-2 mb-0 text-center">
+                            <div t-attf-class="ipac_cv_icons {{ipac_bg_2}}">
+                                <i class="fa fa-map-marker "></i>
+                            </div>
+                            <div class="mx-2">Address</div>
                         </div>
-                        <div class="mx-2">Address</div>
+                        <div class="ml-5" t-esc="o.address_home_id.name"></div>
                     </div>
-                    <div class="ml-5" t-esc="o.address_home_id.name"></div>
-
-                    <div class="" style="direction: ltr; text-align: left;">
+                    <div class="pl-3 mt-5" style="direction: ltr; text-align: left;">
                         <div class="border my-4 mx-4 rounded-pill ipac_cv_contact">
-                            <div class="h3 text-white text-center  my-0 py-1">Language</div>
+                            <div t-attf-class="h3  {{text_color}} text-center  my-0 py-1">Language</div>
                         </div>
                         <t t-foreach="languages[o.id]" t-as="skill">
                             <div class="mx-2 mb-2">
@@ -58,14 +56,13 @@
                             </div>
                         </t>
                     </div>
-
-
                 </div>
 
-
                 <div class="col-8 pt-2 ">
-                    <div t-if="educations[o.id]" class="col-5 py-1 my-4 rounded-pill ipac_cv_contact ipac_bg_1">
-                        <div class="h3 text-center text-white py-1 my-0 ">Education</div>
+                    <!--                    Education-->
+                    <div t-if="educations[o.id]"
+                         t-attf-class="col-5 py-1 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                        <div t-attf-class="h3 text-center  {{text_color}} py-1 my-0 ">Education</div>
                     </div>
                     <t t-foreach="educations[o.id]" t-as="line">
                         <div class="mx-4 mb-3">
@@ -78,27 +75,58 @@
                                  t-esc="desc_line"></div>
                         </div>
                     </t>
-
-
-                    <div class="col-5 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
-                        <div class="h3 text-center  text-white my-0 py-1">Work Experience</div>
+                    <!--                    Work Experience-->
+                    <div class="ipac_pagebreak_avoid">
+                        <div t-attf-class="col-5 py-1 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                            <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Work Experience</div>
+                        </div>
                     </div>
-                    <t t-set="index" t-value="0"/>
-                    <t t-set="length" t-value="len(experiences[o.id])"/>
                     <t t-foreach="experiences[o.id]" t-as="line">
-                        <div class="mx-4 mb-3">
+                        <div class="mx-4 mb-3 ipac_pagebreak_avoid">
                             <div class="row">
                                 <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
                                 <div class="col-4 p-0 small"
                                      t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
                             </div>
-                            <div class="ml-3 small" t-foreach="line['description']" t-as="desc_line"
+                            <div class="ml-3 small ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"
                                  t-esc="desc_line"></div>
                         </div>
-                        <t t-set="index" t-value="index + 1"/>
-                        <!--                        <div t-if="index &lt; length" class="col-5 border border-info m-3"></div>-->
                     </t>
+                    <!--                    Project-->
 
+                    <div t-if="projects_1[o.id]">
+                        <div class="ipac_pagebreak_avoid">
+                            <div t-attf-class="col-4 py-1 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Projects</div>
+                            </div>
+                        </div>
+                        <t t-foreach="projects_1[o.id]" t-as="line">
+                            <div class="ml-5 ipac_pagebreak_avoid">
+                                <div class="row mx-0 ">
+                                    <div class="col mx-0 p-0 " t-esc="line['name']"></div>
+                                    <!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
+                                </div>
+                                <div class="ml-3 ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"
+                                     t-esc="desc_line"></div>
+                            </div>
+                        </t>
+                    </div>
+                    <!--                    Capabilities-->
+                    <div t-if="capabilities_1[o.id]">
+                        <div class="ipac_pagebreak_avoid">
+                            <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Capabilities</div>
+                            </div>
+                        </div>
+                        <t t-foreach="capabilities_1[o.id]" t-as="skill">
+                            <div class="ml-5 ipac_pagebreak_avoid">
+                                <div class="row mx-0">
+                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
+                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
 
                 </div>
             </div>
@@ -109,69 +137,69 @@
         <template id="resume_page_2">
             <div class="">
                 <div class="col-12">
-                    <div t-if="projects[o.id]" class="ipac_pagebreak_avoid">
-                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
-                            <div class="h3 text-center  text-white my-0 py-1">Projects</div>
+
+                    <div t-if="projects_2[o.id]">
+                        <div t-if="not capabilities_1[o.id]" class="ipac_pagebreak_avoid">
+                            <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                                <div t-attf-class="h3 text-center   {{text_color}} my-0 py-1">Projects</div>
+                            </div>
                         </div>
-                        <t t-set="index" t-value="0"/>
-                        <t t-set="length" t-value="len(projects[o.id])"/>
-                        <t t-foreach="projects[o.id]" t-as="line">
-                            <div class="ml-5">
+                        <t t-foreach="projects_2[o.id]" t-as="line">
+                            <div class="ml-5 ipac_pagebreak_avoid">
                                 <div class="row mx-0 ">
                                     <div class="col mx-0 p-0 " t-esc="line['name']"></div>
                                     <!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
                                 </div>
-                                <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
+                                <div class="ml-3 ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"
                                      t-esc="desc_line"></div>
                             </div>
-                            <t t-set="index" t-value="index + 1"/>
-                            <!--                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>-->
                         </t>
-                        <!--                        <div class=" border  m-3"></div>-->
                     </div>
 
-                    <div t-if="qualifications[o.id]" class="ipac_pagebreak_avoid">
-                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
-                            <div class="h3 text-center  text-white my-0 py-1">Qualifications</div>
+                    <div t-if="capabilities_2[o.id]">
+                        <div t-if="not capabilities_1[o.id]" class="ipac_pagebreak_avoid">
+                            <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                                <div t-attf-class="h3 text-center   {{text_color}} my-0 py-1">Capabilities</div>
+                            </div>
                         </div>
-                        <t t-set="index" t-value="0"/>
-                        <t t-set="length" t-value="len(projects[o.id])"/>
+                        <t t-foreach="capabilities_2[o.id]" t-as="skill">
+                            <div class="ml-5 ipac_pagebreak_avoid">
+                                <div class="row mx-0">
+                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
+                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <div t-if="qualifications[o.id]">
+                        <div class="ipac_pagebreak_avoid">
+                            <div t-attf-class="col-4 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Qualifications</div>
+                            </div>
+                        </div>
                         <t t-foreach="qualifications[o.id]" t-as="line">
-                            <div class="ml-5">
+                            <div class="ml-5 ipac_pagebreak_avoid">
                                 <div class="row mx-0">
                                     <div class="col-9 h6 p-0 font-weight-bold" t-esc="line['name']"></div>
                                     <div class="col-3 p-0 small"
                                          t-esc="line['date_start'] + ' - ' + line['date_end'] if line['date_end'] else line['date_start']"></div>
                                 </div>
-                                <div class="ml-3" t-foreach="line['description']" t-as="desc_line"
+                                <div class="ml-3 ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"
                                      t-esc="desc_line"></div>
                             </div>
-<!--                            <t t-set="index" t-value="index + 1"/>-->
-<!--                            <div t-if="index &lt; length" class="col-4 border border-info m-3"></div>-->
                         </t>
                     </div>
 
-                    <div t-if="capabilities[o.id]" class="ipac_pagebreak_avoid">
-                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
-                            <div class="h3 text-center  text-white my-0 py-1">Capabilities</div>
-                        </div>
-                        <t t-foreach="capabilities[o.id]" t-as="skill">
-                            <div class="ml-5">
-                                <div class="row mx-0">
-                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
-                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
+                    <div t-if="software[o.id]">
+                        <div class="ipac_pagebreak_avoid">
+                            <div t-attf-class="col-4 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}} ">
+                                <div t-attf-class="h3 my-0 py-1 text-center ipac_cv_contact {{text_color}}">Software
                                 </div>
                             </div>
-                        </t>
-                    </div>
-
-
-                    <div t-if="software[o.id]" class="ipac_pagebreak_avoid">
-                        <div class="col-4 py-1 my-4  rounded-pill  ipac_bg_1 ">
-                            <div class="h3 text-center  text-white my-0 py-1">Software</div>
                         </div>
                         <t t-foreach="software[o.id]" t-as="skill">
-                            <div class="ml-5">
+                            <div class="ml-5 ipac_pagebreak_avoid">
                                 <div class="row mx-0">
                                     <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
                                     <div class="col-3 p-0" t-esc="skill['level']"></div>
@@ -180,12 +208,15 @@
                         </t>
                     </div>
 
-                    <div t-if="trainings[o.id]" class="ipac_pagebreak_avoid">
-                        <div class="col-4 py-1 my-4  rounded-pill ipac_cv_contact ipac_bg_1">
-                            <div class="h3 text-center  text-white my-0 py-1">Training</div>
+                    <div t-if="trainings[o.id]">
+                        <div class="ipac_pagebreak_avoid">
+                            <div t-attf-class="col-4 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                                <div t-attf-class="h3 text-center {{text_color}} my-0 py-1">Training</div>
+                            </div>
+
                         </div>
                         <t t-foreach="trainings[o.id]" t-as="skill">
-                            <div class="ml-5">
+                            <div class="ml-5 ipac_pagebreak_avoid">
                                 <div class="row mx-0">
                                     <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
                                     <div class="col-3 p-0" t-esc="skill['level']"></div>
@@ -194,9 +225,20 @@
                         </t>
                     </div>
 
+                    <div t-if="awards[o.id]" class="ipac_pagebreak_avoid">
+                        <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">
+                            <div t-attf-class="h3 text-center   {{text_color}} my-0 py-1">Awards</div>
+                        </div>
+                        <t t-foreach="awards[o.id]" t-as="skill">
+                            <div class="ml-5 ipac_pagebreak_avoid">
+                                <div class="row mx-0">
+                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
+                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
                 </div>
-
-
             </div>
 
         </template>
@@ -204,6 +246,9 @@
         <!-- ############################  INTERNAL Daily Report   ############################ -->
 
         <template id="print_resume">
+            <t t-set="text_color" t-value="'text-dark' if report_color == 'bw' else 'text-white'"/>
+            <t t-set="ipac_bg_1" t-value="'bg-200 border ' if report_color == 'bw' else 'ipac_bg_1'"/>
+            <t t-set="ipac_bg_2" t-value="'border border-dark' if report_color == 'bw' else 'ipac_bg_2'"/>
             <div class="header">
                 <t t-call="hr_extend_ipac.resume_header"/>
             </div>
@@ -212,7 +257,12 @@
                 <t t-call="hr_extend_ipac.resume_page_2"/>
             </div>
             <div class="footer p-0">
-                    <div class="text-center x-small p-0"> <span class="page"></span> / <span class="topage"></span></div>
+                <div class="text-center x-small p-0">
+                    <span class="page"></span>
+                    /
+                    <span class="topage"></span>
+                </div>
+
             </div>
         </template>
 
@@ -231,5 +281,18 @@
             </t>
         </template>
 
+        <template id="resume_en_template_bw">
+
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout" t-lang="lang">
+                    <!--                    <t t-call="hr_extend_ipac.resume_header"/>-->
+                    <div class="page1">
+                        <t t-set="lang" t-value="o.env.context.get('lang')"/>
+                        <t t-call="hr_extend_ipac.print_resume" t-lang="lang"/>
+                    </div>
+                </t>
+
+            </t>
+        </template>
     </data>
 </odoo>

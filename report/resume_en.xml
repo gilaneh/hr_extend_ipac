@@ -31,6 +31,20 @@
         <field name="binding_type">report</field>
     </record>
 
+    <record id="resume_en_report_bw" model="ir.actions.report">
+        <field name="name">IPAC Resume BW</field>
+        <field name="model">hr.employee</field>
+<!--        <field name="report_type">xlsx</field>-->
+<!--        <field name="report_type">qweb-html</field>-->
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_extend_ipac.resume_en_template_bw</field>
+        <field name="report_file">hr_extend_ipac.resume_en_template</field>
+        <field name="print_report_name">'Resume-%s' % object.name </field>
+        <field name="paperformat_id" ref="resume_en_a4"/>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+    </record>
+
 <!--    <record id="contract_daily_xls_report" model="ir.actions.report">-->
 <!--        <field name="name">Contract Daily Report</field>-->
 <!--        <field name="model">hr_extend_ipac.input_info</field>-->
