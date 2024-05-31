@@ -139,7 +139,7 @@
                 <div class="col-12">
 
                     <div t-if="projects_2[o.id]">
-                        <div t-if="not capabilities_1[o.id]" class="ipac_pagebreak_avoid">
+                        <div t-if="not projects_1[o.id]" class="ipac_pagebreak_avoid">
                             <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">
                                 <div t-attf-class="h3 text-center   {{text_color}} my-0 py-1">Projects</div>
                             </div>
