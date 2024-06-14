@@ -20,9 +20,9 @@ class HrExtendEmployeeResume(models.Model):
 
     @api.model
     def create(self, vals):
-        res = super().create(vals)
-        resume_extend = self.env['hr_extend_ipac.resume'].create({'employee': res.id}).id
-        vals['resume_extend'] = resume_extend
+        # res = super().create(vals)
+        # resume_extend = self.env['hr_extend_ipac.resume'].create({'employee': res.id}).id
+        # vals['resume_extend'] = resume_extend
         return super().create(vals)
 
     def write(self, vals):
