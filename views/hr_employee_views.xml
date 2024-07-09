@@ -14,6 +14,8 @@
             <xpath expr="//page[@name='public']" position="inside">
                 <group>
                     <field name="resume_extend" readonly="1" invisible="1"/>
+                    <field name="resume_education"/>
+                    <field name="resume_experience"/>
                     <field name="resume_projects"/>
                     <field name="resume_capabilities"/>
                     <field name="resume_qualifications"/>

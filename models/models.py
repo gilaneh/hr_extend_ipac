@@ -9,6 +9,8 @@ class HrExtendIpacResume(models.Model):
     _rec_name = 'employee'
 
     employee = fields.Many2one('hr.employee')
+    education = fields.Text(translate=True)
+    experience = fields.Text(translate=True)
     projects = fields.Text(translate=True)
     capabilities = fields.Text(translate=True)
     qualifications = fields.Text(translate=True)

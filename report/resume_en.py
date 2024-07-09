@@ -126,6 +126,26 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
+            if doc.resume_education and doc.resume_education.strip() != '':
+                resume_education = doc.resume_education.split('\n')
+                for record_name in resume_education:
+                    educa_count += len(record_name) // 80 or 1
+                    educa.append({'id': doc.id,
+                             'name': record_name,
+                             'description': '',
+                             'date_start': '',
+                             'date_end': '',
+                             })
+            if doc.resume_experience and doc.resume_experience.strip() != '':
+                resume_experience = doc.resume_experience.split('\n')
+                for record_name in resume_experience:
+                    exper_count += len(record_name) // 80 or 1
+                    exper.append({'id': doc.id,
+                             'name': record_name,
+                             'description': '',
+                             'date_start': '',
+                             'date_end': '',
+                             })
             if doc.resume_projects and doc.resume_projects.strip() != '':
                 resume_projects = doc.resume_projects.split('\n')
                 for record_name in resume_projects:
