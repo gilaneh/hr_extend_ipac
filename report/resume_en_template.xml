@@ -76,31 +76,30 @@
                         </div>
                     </t>
                     <!--                    Work Experience-->
-                    <div class="ipac_pagebreak_avoid">
-                        <div t-attf-class="col-5 py-1 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">
-                            <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Work Experience</div>
-                        </div>
-                    </div>
-                    <t t-foreach="experiences[o.id]" t-as="line">
-                        <div class="mx-4 mb-3 ipac_pagebreak_avoid">
-                            <div class="row">
-                                <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
-                                <div class="col-4 p-0 small"
-                                     t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
-                            </div>
-                            <div class="ml-3 small ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"
-                                 t-esc="desc_line"></div>
-                        </div>
-                    </t>
-                    <!--                    Project-->
+<!--                    <div class="ipac_pagebreak_avoid">-->
+<!--                        <div t-attf-class="col-5 py-1 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">-->
+<!--                            <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Work Experience</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <t t-foreach="experiences[o.id]" t-as="line">-->
+<!--                        <div class="mx-4 mb-3 ipac_pagebreak_avoid">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>-->
+<!--                                <div class="col-4 p-0 small"-->
+<!--                                     t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
+<!--                            </div>-->
+<!--                            <div class="ml-3 small ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"-->
+<!--                                 t-esc="desc_line"></div>-->
+<!--                        </div>-->
+<!--                    </t>-->
 
-                    <div t-if="projects_1[o.id]">
+                    <div t-if="experiences_1[o.id]">
                         <div class="ipac_pagebreak_avoid">
                             <div t-attf-class="col-4 py-1 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">
-                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Projects</div>
+                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Work Experience</div>
                             </div>
                         </div>
-                        <t t-foreach="projects_1[o.id]" t-as="line">
+                        <t t-foreach="experiences_1[o.id]" t-as="line">
                             <div class="ml-5 ipac_pagebreak_avoid">
                                 <div class="row mx-0 ">
                                     <div class="col mx-0 p-0 " t-esc="line['name']"></div>
@@ -111,22 +110,42 @@
                             </div>
                         </t>
                     </div>
-                    <!--                    Capabilities-->
-                    <div t-if="capabilities_1[o.id]">
-                        <div class="ipac_pagebreak_avoid">
-                            <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">
-                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Capabilities</div>
-                            </div>
-                        </div>
-                        <t t-foreach="capabilities_1[o.id]" t-as="skill">
-                            <div class="ml-5 ipac_pagebreak_avoid">
-                                <div class="row mx-0">
-                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>
-                                    <div class="col-3 p-0" t-esc="skill['level']"></div>
-                                </div>
-                            </div>
-                        </t>
-                    </div>
+
+                    <!--                    Project-->
+
+<!--                    <div t-if="projects_1[o.id]">-->
+<!--                        <div class="ipac_pagebreak_avoid">-->
+<!--                            <div t-attf-class="col-4 py-1 my-4 rounded-pill ipac_cv_contact {{ipac_bg_1}}">-->
+<!--                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Projects</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <t t-foreach="projects_1[o.id]" t-as="line">-->
+<!--                            <div class="ml-5 ipac_pagebreak_avoid">-->
+<!--                                <div class="row mx-0 ">-->
+<!--                                    <div class="col mx-0 p-0 " t-esc="line['name']"></div>-->
+<!--                                    &lt;!&ndash;                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <div class="ml-3 ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"-->
+<!--                                     t-esc="desc_line"></div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    Capabilities&ndash;&gt;-->
+<!--                    <div t-if="capabilities_1[o.id]">-->
+<!--                        <div class="ipac_pagebreak_avoid">-->
+<!--                            <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">-->
+<!--                                <div t-attf-class="h3 my-0 py-1 text-center {{text_color}}">Capabilities</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <t t-foreach="capabilities_1[o.id]" t-as="skill">-->
+<!--                            <div class="ml-5 ipac_pagebreak_avoid">-->
+<!--                                <div class="row mx-0">-->
+<!--                                    <div class="col-9 h6 p-0" t-esc="skill['name']"></div>-->
+<!--                                    <div class="col-3 p-0" t-esc="skill['level']"></div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </div>-->
 
                 </div>
             </div>
@@ -138,6 +157,23 @@
             <div class="">
                 <div class="col-12">
 
+                    <div t-if="experiences_2[o.id]">
+<!--                        <div t-if="not projects_1[o.id]" class="ipac_pagebreak_avoid">-->
+<!--                            <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">-->
+<!--                                <div t-attf-class="h3 text-center   {{text_color}} my-0 py-1">Projects</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <t t-foreach="experiences_2[o.id]" t-as="line">
+                            <div class="ml-5 ipac_pagebreak_avoid">
+                                <div class="row mx-0 ">
+                                    <div class="col mx-0 p-0 " t-esc="line['name']"></div>
+                                    <!--                                    <div class="ml-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
+                                </div>
+                                <div class="ml-3 ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"
+                                     t-esc="desc_line"></div>
+                            </div>
+                        </t>
+                    </div>
                     <div t-if="projects_2[o.id]">
                         <div t-if="not projects_1[o.id]" class="ipac_pagebreak_avoid">
                             <div t-attf-class="col-4 py-1 my-4  rounded-pill ipac_cv_contact {{ipac_bg_1}}">
