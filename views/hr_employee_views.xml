@@ -14,14 +14,14 @@
             <xpath expr="//page[@name='public']" position="inside">
                 <group>
                     <field name="resume_extend" readonly="1" invisible="1"/>
-                    <field name="resume_education"/>
-                    <field name="resume_experience"/>
-                    <field name="resume_projects"/>
-                    <field name="resume_capabilities"/>
-                    <field name="resume_qualifications"/>
-                    <field name="resume_software"/>
-                    <field name="resume_trainings"/>
-                    <field name="resume_awards"/>
+                    <field name="resume_education" attrs="{'readonly': [('id', '=', False)]}"/>
+                    <field name="resume_experience" attrs="{'readonly': [('id', '=', False)]}"/>
+                    <field name="resume_projects" attrs="{'readonly': [('id', '=', False)]}"/>
+                    <field name="resume_capabilities" attrs="{'readonly': [('id', '=', False)]}"/>
+                    <field name="resume_qualifications" attrs="{'readonly': [('id', '=', False)]}"/>
+                    <field name="resume_software" attrs="{'readonly': [('id', '=', False)]}"/>
+                    <field name="resume_trainings" attrs="{'readonly': [('id', '=', False)]}"/>
+                    <field name="resume_awards" attrs="{'readonly': [('id', '=', False)]}"/>
                 </group>
             </xpath>
         </field>
