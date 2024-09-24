@@ -41,7 +41,7 @@
                             </div>
                             <div class="mx-2">Address</div>
                         </div>
-                        <div class="ml-5" t-esc="o.address_home_id.name"></div>
+                        <div class="ml-5" t-esc="o.address_id.name"></div>
                     </div>
                     <div class="pl-3 mt-5" style="direction: ltr; text-align: left;">
                         <div class="border my-4 mx-4 rounded-pill ipac_cv_contact">
