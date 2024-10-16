@@ -11,6 +11,8 @@ class HrExtendEmployeeResume(models.Model):
     job_title = fields.Char(translate=True)
     # capabilities = fields.Many2one('hr_extend_ipac.resume')
     resume_extend = fields.Many2one('hr_extend_ipac.resume')
+    resume_education = fields.Text(related='resume_extend.education', readonly=False)
+    resume_experience = fields.Text(related='resume_extend.experience', readonly=False)
     resume_projects = fields.Text(related='resume_extend.projects', readonly=False)
     resume_capabilities = fields.Text(related='resume_extend.capabilities', readonly=False)
     resume_qualifications = fields.Text(related='resume_extend.qualifications', readonly=False)
