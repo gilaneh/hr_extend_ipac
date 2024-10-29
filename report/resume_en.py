@@ -109,19 +109,19 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
 
             for skill in doc.employee_skill_ids:
                 if skill.skill_type_id.name == 'Language':
-                    langu_count += 1 + len(line.description.split('\n')) if line.description else 0
+                    # langu_count += (1 + len(line.description.split('\n'))) if line.description else 0
                     langu.append({  'id': doc.id,
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
                 elif skill.skill_type_id.name == 'Capabilities':
-                    capab_count += 1 + len(line.description.split('\n')) if line.description else 0
+                    # capab_count += 1 + len(line.description.split('\n')) if line.description else 0
                     capab.append({  'id': doc.id,
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
                 elif skill.skill_type_id.name == 'Software':
-                    soft_count += 1 + len(line.description.split('\n')) if line.description else 0
+                    # soft_count += 1 + len(line.description.split('\n')) if line.description else 0
                     soft.append({  'id': doc.id,
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
