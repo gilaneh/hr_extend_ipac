@@ -68,8 +68,9 @@
                         <div class="mx-4 mb-3">
                             <div class="row">
                                 <div class="col-8 p-0 h6 font-weight-bold" t-esc="line['name']"></div>
-                                <div class="col-4 p-0 small"
-                                     t-esc="line['date_start'] + ' - ' + line['date_end']"></div>
+                                <div t-if="line['date_start']" class="col-4 p-0 small"
+                                     t-esc="line['date_start'] + ' - ' + line['date_end']">
+                                </div>
                             </div>
                             <div class="ms-3 small" t-foreach="line['description']" t-as="desc_line"
                                  t-esc="desc_line"></div>
@@ -114,7 +115,7 @@
                         <t t-foreach="projects_2[o.id]" t-as="line">
                             <div class="ms-5 ipac_pagebreak_avoid">
                                 <div class="row mx-0 ">
-                                    <div class="col mx-0 p-0 " t-esc="line['name']"></div>
+                                    <div class="col h6 p-0 " t-esc="line['name']" style="line-height:2;"></div>
                                     <!--                                    <div class="ms-5" t-esc="line['date_start'] + ' - ' + line['date_end']"></div>-->
                                 </div>
                                 <div class="ms-3 ipac_pagebreak_avoid" t-foreach="line['description']" t-as="desc_line"
