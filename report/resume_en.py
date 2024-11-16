@@ -47,6 +47,8 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
         doc_list = []
         educations = {}
         experiences = {}
+        experiences_1 = {}
+        experiences_2 = {}
         projects_1 = {}
         projects_2 = {}
         qualifications = {}
@@ -109,7 +111,7 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
 
             for skill in doc.employee_skill_ids:
                 if skill.skill_type_id.name == 'Language':
-                    # langu_count += (1 + len(line.description.split('\n'))) if line.description else 0
+                    # langu_count += 1 + len(line.description.split('\n')) if line.description else 0
                     langu.append({  'id': doc.id,
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
@@ -126,6 +128,27 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                                     'name': skill.skill_id.name,
                                     'level': skill.skill_level_id.name,
                                     })
+            if doc.resume_education and doc.resume_education.strip() != '':
+                resume_education = doc.resume_education.split('\n')
+                for record_name in resume_education:
+                    educa_count += len(record_name) // 60 or 1
+                    educa.append({'id': doc.id,
+                             'name': record_name,
+                             'description': '',
+                             'date_start': '',
+                             'date_end': '',
+                             })
+
+            if doc.resume_experience and doc.resume_experience.strip() != '':
+                resume_experience = doc.resume_experience.split('\n')
+                for record_name in resume_experience:
+                    exper_count += len(record_name) // 60 or 1
+                    exper.append({'id': doc.id,
+                             'name': record_name,
+                             'description': '',
+                             'date_start': '',
+                             'date_end': '',
+                             })
             if doc.resume_projects and doc.resume_projects.strip() != '':
                 resume_projects = doc.resume_projects.split('\n')
                 for record_name in resume_projects:
@@ -182,23 +205,38 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
                              })
 
             educations[doc.id] = educa
-            experiences[doc.id] = exper
 
-            edu_exp_count = educa_count + exper_count
-            if 26 - edu_exp_count <= 0:
-                projects_1[doc.id] = []
-                projects_2[doc.id] = proj
+            # experiences[doc.id] = exper
+            # edu_exp_count = educa_count + exper_count
+            if 28 - educa_count <= 0:
+                experiences_1[doc.id] = []
+                experiences_2[doc.id] = exper
             else:
-                projects_1[doc.id] = proj[0: 26 - edu_exp_count]
-                projects_2[doc.id] = proj[26 - edu_exp_count:]
+                experiences_1[doc.id] = exper[0: 28 - educa_count]
+                experiences_2[doc.id] = exper[28 - educa_count:]
 
-            edu_exp_proj_count = educa_count + exper_count + proj_count
-            if 21 - edu_exp_proj_count <= 0:
-                capabilities_1[doc.id] = []
-                capabilities_2[doc.id] = capab
-            else:
-                capabilities_1[doc.id] = capab[0: 21 - edu_exp_proj_count]
-                capabilities_2[doc.id] = capab[21 - edu_exp_proj_count:]
+            projects_1[doc.id] = []
+            projects_2[doc.id] = proj
+            capabilities_1[doc.id] = []
+            capabilities_2[doc.id] = capab
+
+            # edu_exp_count = educa_count + exper_count
+            # if 20 - edu_exp_count <= 0:
+            #     projects_1[doc.id] = []
+            #     projects_2[doc.id] = proj
+            # else:
+            #     projects_1[doc.id] = proj[0: 20 - edu_exp_count]
+            #     projects_2[doc.id] = proj[20 - edu_exp_count:]
+            #
+            # edu_exp_proj_count = educa_count + exper_count + proj_count
+            # if edu_exp_count + 10 - edu_exp_proj_count <= 0:
+            #     capabilities_1[doc.id] = []
+            #     capabilities_2[doc.id] = capab
+            # else:
+            #     capabilities_1[doc.id] = capab[0: edu_exp_count + 10 - edu_exp_proj_count]
+            #     capabilities_2[doc.id] = capab[edu_exp_count + 10 - edu_exp_proj_count:]
+            #
+            # print(f'edu_exp_proj_count\n    edu_exp_count: {edu_exp_count} \n    edu_exp_proj_count: {edu_exp_proj_count}')
 
             qualifications[doc.id] = quali
             software[doc.id] = soft
@@ -210,7 +248,8 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
             'docs': docs,
             'doc_ids': docids,
             'educations': educations,
-            'experiences': experiences,
+            'experiences_1': experiences_1,
+            'experiences_2': experiences_2,
             'projects_1': projects_1,
             'projects_2': projects_2,
             'qualifications': qualifications,
@@ -265,4 +304,3 @@ class ReportHrExtendIpacResumeEn(models.AbstractModel):
         month = int(round(month, 0))
         total = int(round(total, 0))
         return day, month, total
-
