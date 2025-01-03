@@ -7,8 +7,7 @@ from odoo import fields, models, api
 class HrExtendEmployeeResume(models.Model):
     _inherit = "hr.employee"
 
-    name_cv = fields.Char(translate=True)
-    job_title = fields.Char(translate=True)
+
     # capabilities = fields.Many2one('hr_extend_ipac.resume')
     resume_extend = fields.Many2one('hr_extend_ipac.resume')
     resume_education = fields.Text(related='resume_extend.education', readonly=False)
